@@ -30,30 +30,6 @@ class NPRShader(Operator):
 
     def execute(self,context):
         import_from_library('npr_shader');
-        # NPR Material Shader
-        bpy.ops.object.material_slot_add()
-
-        npr_material = bpy.data.materials.new(name='NPR SHADER')
-        npr_material.use_nodes = True
-
-        npr_material.node_tree.nodes.remove(npr_material.node_tree.nodes.get('Principled BSDF'))
-        material_output = npr_material.node_tree.nodes.get('Material Output')
-
-        #Create a node group
-        #Replace the node group into a existing node group for another blend file
-        #Connect the node group outputs to material node inputs
-
-
-        # Problem is to create a node group
-
-        SHADER = bpy.data.node_groups['NPRSHADEREVEE']
-        # adding the custom group as new group's node tree
-        SHADER.node_tree = bpy.data.node_groups['EXISTING CUSTOM SHADER EEVEE']
-
-        # link diffuse shader to material
-        npr_material.node_tree.links.new(material_output.inputs[0], SHADER.node_tree[0])
-        # set activer material to your new material
-        bpy.context.object.active_material = npr_material
         return {'FINISHED'}
 
 class Outline(Operator):
@@ -112,5 +88,5 @@ def register():
 
 def unregister():
     bpy.utils.unregister_class(ShaderPanel)
-    bpy.utils.register_class(NPRShader)
-    bpy.utils.register_class(Outline)
+    bpy.utils.unregister_class(NPRShader)
+    bpy.utils.unregister_class(Outline)
