@@ -7,6 +7,9 @@ bl_info = {
     "description" : "Add Non-photo realistic Shader to your Meshes"
     }
 
+
+# THIS IS WORK IN PROGRESS, PLESASE INSTALL THE STABLE RELEASE ON RELEASE FOLDER
+
 import bpy
 import os
 from bpy.types import Panel, Operator
@@ -112,5 +115,5 @@ def register():
 
 def unregister():
     bpy.utils.unregister_class(ShaderPanel)
-    bpy.utils.register_class(NPRShader)
-    bpy.utils.register_class(Outline)
+    bpy.utils.unregister_class(NPRShader)
+    bpy.utils.unregister_class(Outline)
