@@ -4,7 +4,7 @@
 Set of group nodes that transforms your meshes into non-photorealistic Shaders
 
 Simply go to [Releases](https://github.com/kents00/NprEevee/releases) and download the most recent release to install the most recent version of this project. 
-Simply go to folder `release` and copy the zip file to install this inside of Blender, and you're good to go.
+Simply go to folder `release` and copy the zip file and install this inside of Blender, and you're good to go.
 
 #### How to Use
 
