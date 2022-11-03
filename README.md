@@ -8,6 +8,7 @@ Simply go to folder `release` and copy the zip file and install this inside of B
 #### How to Use
 
 `Add NPR Shader` Adds NPR material in your materials properties 
+
 `Add Outline` Adds Outline Material and solidfy modifier to your mesh
 
 ![](https://imgur.com/rhAhITn.png)
