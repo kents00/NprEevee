@@ -438,7 +438,3 @@ def unregister():
     bpy.utils.unregister_class(NPR_Shader)
     bpy.utils.unregister_class(Outline)
     bpy.utils.register_class(ShaderPanel)
-
-
-if __name__ == "__main__":
-    register()
