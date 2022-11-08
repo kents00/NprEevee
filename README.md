@@ -1,6 +1,6 @@
 # NprEevee
 
-![](https://imgur.com/zOT23Hr.png)
+![](https://imgur.com/dRSjo7v.png)
 Set of group nodes that transforms your meshes into non-photorealistic Shaders
 
 Download this repo and go to folder `release` and copy the zip file and install this inside of Blender, and you're good to go.
