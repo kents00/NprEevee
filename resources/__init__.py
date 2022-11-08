@@ -35,9 +35,9 @@ class NPR_Shader(Operator):
 
         npr_group = bpy.data.node_groups.new(type = "ShaderNodeTree", name = "NPR Shader")
 
-        #Input
-        group_input = npr_group.nodes.new("NodeGroupInput")
-        group_input.location = (174, 71)
+        # setup nodes inside the group
+        group_in = npr_group.nodes.new("NodeGroupInput")
+        group_in.location = (-1250,350)
         npr_group.inputs.new('NodeSocketColor','Base Color')
         npr_group.inputs.new('NodeSocketColor','Shadow Color')
         npr_group.inputs.new('NodeSocketColor','Key Light Color')
@@ -53,253 +53,252 @@ class NPR_Shader(Operator):
         npr_group.inputs.new('NodeSocketFloatFactor','Offset Y')
         npr_group.inputs.new('NodeSocketFloatFactor','Offset Z')
 
-        #Output
-        group_output = npr_group.nodes.new("NodeGroupOutput")
-        group_output.location = (269, 90)
+
+        groupin_keylight = npr_group.nodes.new("NodeGroupInput")
+        groupin_keylight.location = (-600, -600)
+
+
+        group_out = npr_group.nodes.new("NodeGroupOutput")
+        group_out.location = (650,400)
         npr_group.outputs.new('NodeSocketColor','Color')
+
+        # CONNECTING NODES
+        link = npr_group.links.new
 
         #Diffuse BSDF
         diffuse_bsdf = npr_group.nodes.new(type = "ShaderNodeBsdfDiffuse")
-        diffuse_bsdf.location = (120,128)
+        diffuse_bsdf.location = (-950,-350)
 
         #Shader To RGB
         shaderto_rgb_1 = npr_group.nodes.new(type = "ShaderNodeShaderToRGB")
-        shaderto_rgb_1.location = (196, 139)
+        shaderto_rgb_1.location = (-700, -400)
 
         #Separate Color
         separate_color = npr_group.nodes.new(type = "ShaderNodeSeparateColor")
-        separate_color.location = (282, 129)
-
-
-
+        separate_color.location = (-500, -400)
 
         # KEY LIGHT SECTION
 
         """Color Ramp"""
         color_ramp_1 = npr_group.nodes.new(type = "ShaderNodeValToRGB")
-        color_ramp_1.location = (267, 129)
+        color_ramp_1.location = (-300, -150)
 
         color_ramp_1.color_ramp.interpolation = "CONSTANT"
 
-        # Color1
+        #Color1
+        color_ramp_1.color_ramp.elements.new(0.400)
+        color_ramp_1.color_ramp.elements[1].color = (1,1,1,1)
+
+        # Color2
         color_ramp_1.color_ramp.elements.new(0.396)
         color_ramp_1.color_ramp.elements[0].color = (0,0,0,1)
 
-        #Color2
-        color_ramp_1.color_ramp.elements.new(0.400)
-        color_ramp_1.color_ramp.elements[0].color = (1,1,1,1)
+        color_ramp_1.color_ramp.elements.remove( color_ramp_1.color_ramp.elements[0] )
+        color_ramp_1.color_ramp.elements.remove( color_ramp_1.color_ramp.elements[2] )
+
 
         color_ramp_2 = npr_group.nodes.new(type = "ShaderNodeValToRGB")
-        color_ramp_2.location = (280, 34)
+        color_ramp_2.location = (-300, -450)
 
         color_ramp_2.color_ramp.interpolation = "CONSTANT"
 
-        # Color1
-        color_ramp_2.color_ramp.elements.new(0.396)
+        #Color1
+        color_ramp_2.color_ramp.elements.new(0.900)
+        color_ramp_2.color_ramp.elements[1].color = (1,1,1,1)
+
+        # Color2
+        color_ramp_2.color_ramp.elements.new(0.899)
         color_ramp_2.color_ramp.elements[0].color = (0,0,0,1)
 
-        #Color2
-        color_ramp_2.color_ramp.elements.new(0.400)
-        color_ramp_2.color_ramp.elements[0].color = (1,1,1,1)
+        color_ramp_2.color_ramp.elements.remove( color_ramp_2.color_ramp.elements[0] )
+        color_ramp_2.color_ramp.elements.remove( color_ramp_2.color_ramp.elements[2] )
 
 
         color_ramp_3 = npr_group.nodes.new(type = "ShaderNodeValToRGB")
-        color_ramp_3.location = (310, 79)
+        color_ramp_3.location = (-300, -750)
 
         color_ramp_3.color_ramp.interpolation = "CONSTANT"
 
-        # Color1
-        color_ramp_3.color_ramp.elements.new(0.396)
+        #Color1
+        color_ramp_3.color_ramp.elements.new(0.400)
+        color_ramp_3.color_ramp.elements[1].color = (1,1,1,1)
+
+        # Color2
+        color_ramp_3.color_ramp.elements.new(0.388)
         color_ramp_3.color_ramp.elements[0].color = (0,0,0,1)
 
-        #Color2
-        color_ramp_3.color_ramp.elements.new(0.400)
-        color_ramp_3.color_ramp.elements[0].color = (1,1,1,1)
+        color_ramp_3.color_ramp.elements.remove( color_ramp_3.color_ramp.elements[0] )
+        color_ramp_3.color_ramp.elements.remove( color_ramp_3.color_ramp.elements[2] )
 
-
-        """Mix RGB"""
+        """MIX RGB"""
         mix_rgb_1 = npr_group.nodes.new(type = "ShaderNodeMixRGB")
-        mix_rgb_1.location = (294, 113)
+        mix_rgb_1.location = (0, -150)
         mix_rgb_1.blend_type = 'MULTIPLY'
         mix_rgb_1.inputs[0].default_value = 1
 
         mix_rgb_2 = npr_group.nodes.new(type = "ShaderNodeMixRGB")
-        mix_rgb_2.location = (295, 124)
+        mix_rgb_2.location = (0, -450)
         mix_rgb_2.blend_type = 'MULTIPLY'
         mix_rgb_2.inputs[0].default_value = 1
 
         mix_rgb_3 = npr_group.nodes.new(type = "ShaderNodeMixRGB")
-        mix_rgb_3.location = (306, 115)
+        mix_rgb_3.location = (0, -750)
         mix_rgb_3.blend_type = 'MULTIPLY'
         mix_rgb_3.inputs[0].default_value = 1
 
 
 
 
-        # OUTLINE SECTION
-
-        """Color Ramp"""
+        #OUTLINE SECTION
         color_ramp_4 = npr_group.nodes.new(type = "ShaderNodeValToRGB")
-        color_ramp_4.location = (426, 80)
+        color_ramp_4.location = (-300, 700)
 
         color_ramp_4.color_ramp.interpolation = "CONSTANT"
 
-        # Color1
-        color_ramp_4.color_ramp.elements.new(0.523)
-        color_ramp_4.color_ramp.elements[0].color = (1,1,1,1)
-
-        #Color2
+        #Color1
         color_ramp_4.color_ramp.elements.new(0.600)
         color_ramp_4.color_ramp.elements[0].color = (0,0,0,1)
 
+        # Color2
+        color_ramp_4.color_ramp.elements.new(0.599)
+        color_ramp_4.color_ramp.elements[1].color = (1,1,1,1)
+
+        color_ramp_4.color_ramp.elements.remove( color_ramp_4.color_ramp.elements[0] )
+        color_ramp_4.color_ramp.elements.remove( color_ramp_4.color_ramp.elements[2] )
+
+
         """Math"""
         math_node_1 = npr_group.nodes.new(type = "ShaderNodeMath")
-        math_node_1.location = (197, 121)
+        math_node_1.location = (-500, 700)
         math_node_1.operation = "POWER"
 
         math_node_2 = npr_group.nodes.new(type = "ShaderNodeMath")
-        math_node_2.location = (257, 107)
+        math_node_2.location = (-700, 700)
         math_node_2.operation = "MULTIPLY"
 
         math_node_3 = npr_group.nodes.new(type = "ShaderNodeMath")
-        math_node_3.location = (273, 113)
+        math_node_3.location = (-900, 700)
         math_node_3.operation = "ADD"
 
         math_node_4 = npr_group.nodes.new(type = "ShaderNodeMath")
-        math_node_4.location = (245, 139)
+        math_node_4.location = (-1100, 700)
         math_node_4.operation = "MULTIPLY"
 
         """Layer Weight"""
         layer_weight_1 = npr_group.nodes.new(type = "ShaderNodeLayerWeight")
-        layer_weight_1.location = (321,123)
-
-
+        layer_weight_1.location = (-700,900)
+        layer_weight_1.inputs[0].default_value = 0.5
 
 
 
         # SPECULAR SECTION
-
-        """Color Ramp"""
-
         color_ramp_5 = npr_group.nodes.new(type = "ShaderNodeValToRGB")
-        color_ramp_5.location = (335, 136)
+        color_ramp_5.location = (-300, 2000)
 
-        color_ramp_1.color_ramp.interpolation = "LINEAR"
+        color_ramp_5.color_ramp.interpolation = "CONSTANT"
 
-        # Color1
-        color_ramp_5.color_ramp.elements.new(0.018)
+        #Color1
+        color_ramp_5.color_ramp.elements.new(0.090)
         color_ramp_5.color_ramp.elements[0].color = (0,0,0,1)
 
-        #Color2
-        color_ramp_5.color_ramp.elements.new(0.155)
-        color_ramp_5.color_ramp.elements[0].color = (1,1,1,1)
+        # Color2
+        color_ramp_5.color_ramp.elements.new(0.100)
+        color_ramp_5.color_ramp.elements[1].color = (1,1,1,1)
+
+        color_ramp_5.color_ramp.elements.remove( color_ramp_5.color_ramp.elements[0] )
+        color_ramp_5.color_ramp.elements.remove( color_ramp_5.color_ramp.elements[2] )
 
         color_ramp_6 = npr_group.nodes.new(type = "ShaderNodeValToRGB")
-        color_ramp_6.location = (285, 55)
+        color_ramp_6.location = (-300, 1700)
 
-        color_ramp_6.color_ramp.interpolation = "LINEAR"
+        color_ramp_6.color_ramp.interpolation = "CONSTANT"
 
-        # Color1
-        color_ramp_6.color_ramp.elements.new(0.055)
+        #Color1
+        color_ramp_6.color_ramp.elements.new(0.090)
         color_ramp_6.color_ramp.elements[0].color = (0,0,0,1)
 
-        #Color2
-        color_ramp_6.color_ramp.elements.new(0.068)
-        color_ramp_6.color_ramp.elements[0].color = (1,1,1,1)
+        # Color2
+        color_ramp_6.color_ramp.elements.new(0.100)
+        color_ramp_6.color_ramp.elements[1].color = (1,1,1,1)
 
+        color_ramp_6.color_ramp.elements.remove( color_ramp_6.color_ramp.elements[0] )
+        color_ramp_6.color_ramp.elements.remove( color_ramp_6.color_ramp.elements[2] )
 
         """Mix RGB"""
         mix_rgb_4 = npr_group.nodes.new(type = "ShaderNodeMixRGB")
-        mix_rgb_4.location = (225, 143)
-        mix_rgb_4.blend_type = 'MIX'
+        mix_rgb_4.location = (450, 1800)
+        mix_rgb_4.blend_type = 'MULTIPLY'
+        mix_rgb_4.inputs[0].default_value = 1
         # mix_rgb_4.inputs[0] # Fac output is connected to 'Softness' Group Input
 
         mix_rgb_5 = npr_group.nodes.new(type = "ShaderNodeMixRGB")
-        mix_rgb_5.location = (306, 115)
-        mix_rgb_5.blend_type = 'MULTIPLY'
-        mix_rgb_5.inputs[0].default_value = 1
+        mix_rgb_5.location = (100, 1800)
+        mix_rgb_5.blend_type = 'MIX'
+
 
         """Shader To RGB"""
         shaderto_rgb_2 = npr_group.nodes.new(type = "ShaderNodeShaderToRGB")
-        shaderto_rgb_2.location = (367, 117)
+        shaderto_rgb_2.location = (-550, 2000)
 
         """Specular BDSF"""
         specular_bdsf = npr_group.nodes.new(type = "ShaderNodeEeveeSpecular")
-        specular_bdsf.location = (223, 122)
+        specular_bdsf.location = (-750, 2000)
 
         """Vector Math"""
         vector_math_1 = npr_group.nodes.new(type = "ShaderNodeVectorMath")
-        vector_math_1.location = (225, 124)
+        vector_math_1.location = (-950, 2000)
         vector_math_1.operation = "ADD"
 
         """Geometry"""
         geometry_1 = npr_group.nodes.new(type = "ShaderNodeNewGeometry")
-        geometry_1.location = (238, 143)
+        geometry_1.location = (-1250, 2000)
 
         """Combine XYZ"""
         combine_xyz = npr_group.nodes.new(type = "ShaderNodeCombineXYZ")
-        combine_xyz.location = (245, 109)
+        combine_xyz.location = (-1550, 2000)
 
-
-
-        # BASE SECTION
-
-        """Mix RGB"""
-        mix_rgb_6 = npr_group.nodes.new(type = "ShaderNodeMixRGB")
-        mix_rgb_6.location = (203, 146)
-        mix_rgb_6.blend_type = 'MULTIPLY'
-        mix_rgb_6.inputs[0].default_value = 1
-
-
-
-
-        # NEAR KEY LIGHT / BASE SECTION
+        #NEAR LIGHT / BASE SECTION
 
         """Mix RGB"""
         mix_rgb_7 = npr_group.nodes.new(type = "ShaderNodeMixRGB")
-        mix_rgb_7.location = (220, 147)
+        mix_rgb_7.location = (350, -200)
         mix_rgb_7.blend_type = 'LIGHTEN'
         mix_rgb_7.inputs[0].default_value = 1
 
         mix_rgb_8 = npr_group.nodes.new(type = "ShaderNodeMixRGB")
-        mix_rgb_8.location = (328, 136)
-        mix_rgb_8.blend_type = 'ADD'
+        mix_rgb_8.location = (450, -250)
+        mix_rgb_8.blend_type = 'MULTIPLY'
         mix_rgb_8.inputs[0].default_value = 1
-        # mix_rgb_9.inputs[1]
-        # mix_rgb_9.inputs[2] # This will be connected to mix shader specular section
 
         mix_rgb_9 = npr_group.nodes.new(type = "ShaderNodeMixRGB")
-        mix_rgb_9.location = (379, 129)
+        mix_rgb_9.location = (650, -350)
         mix_rgb_9.blend_type = 'ADD'
         mix_rgb_9.inputs[0].default_value = 1
 
-        # mix_rgb_9.inputs[1]
-        # mix_rgb_9.inputs[0] # Fac output is connected to Key Light 'Color Ramp' Output
-
-
         mix_rgb_10 = npr_group.nodes.new(type = "ShaderNodeMixRGB")
-        mix_rgb_10.location = (379, 129)
-        mix_rgb_10.blend_type = 'MIX'
-        # mix_rgb_10.inputs[0] # Fac output is connected to Outline SECTION 'Color Ramp' Output
+        mix_rgb_10.location = (850, -550)
+        mix_rgb_10.blend_type = 'ADD'
+        mix_rgb_10.inputs[0].default_value = 1
 
-        # The output color of this mix rgb will be inserted to "NodeGroupOutput"
         mix_rgb_11 = npr_group.nodes.new(type = "ShaderNodeMixRGB")
-        mix_rgb_11.location = (316, 149)
-        mix_rgb_11.blend_type = 'ADD'
+        mix_rgb_11.location = (1050, -650)
+        mix_rgb_11.blend_type = 'MIX'
         mix_rgb_11.inputs[0].default_value = 1
 
+        mix_rgb_12 = npr_group.nodes.new(type = "ShaderNodeMixRGB")
+        mix_rgb_12.location = (1150, -750)
+        mix_rgb_12.blend_type = 'ADD'
+        mix_rgb_12.inputs[0].default_value = 1
 
 
 
-        # CONNECTING NODES
 
-        link = npr_group.links.new
 
-        # DIFFUSE SECTION
+        #DIFFUSE SECTION
         link(diffuse_bsdf.outputs[0], shaderto_rgb_1.inputs[0])
         link(shaderto_rgb_1.outputs[0], separate_color.inputs[0])
 
-            # KEY LIGHT SECTION
+        # KEY LIGHT SECTION
         link(separate_color.outputs[0], color_ramp_1.inputs[0])
         link(separate_color.outputs[1], color_ramp_2.inputs[0])
         link(separate_color.outputs[2], color_ramp_3.inputs[0])
@@ -308,52 +307,58 @@ class NPR_Shader(Operator):
         link(color_ramp_2.outputs[0], mix_rgb_2.inputs[1])
         link(color_ramp_3.outputs[0], mix_rgb_3.inputs[1])
 
-        link(mix_rgb_1.inputs[2], group_input.outputs[2])
-        link(mix_rgb_2.inputs[2], group_input.outputs[3])
-        link(mix_rgb_3.inputs[2], group_input.outputs[4])
+        link(mix_rgb_1.inputs[2], groupin_keylight.outputs[2])
+        link(mix_rgb_2.inputs[2], groupin_keylight.outputs[3])
+        link(mix_rgb_3.inputs[2], groupin_keylight.outputs[4])
 
         # OUTLINE SECTION
-        link(color_ramp_4.outputs[0], mix_rgb_11.inputs[0])
+        # link(color_ramp_4.outputs[0], mix_rgb_11.inputs[0])
         link(math_node_1.outputs[0], color_ramp_4.inputs[0])
         link(layer_weight_1.outputs[0], math_node_1.inputs[0])
         link(math_node_2.outputs[0], math_node_1.inputs[1])
         link(separate_color.outputs[1], math_node_2.inputs[0])
         link(math_node_3.outputs[0], math_node_2.inputs[1])
-        link(group_input.outputs[7], math_node_3.inputs[1])
+        link(group_in.outputs[7], math_node_3.inputs[1])
         link(math_node_4.outputs[0], math_node_3.inputs[0])
-        link(group_input.outputs[8], math_node_4.inputs[0])
-        link(group_input.outputs[6], math_node_4.inputs[1])
+        link(group_in.outputs[8], math_node_4.inputs[0])
+        link(group_in.outputs[6], math_node_4.inputs[1])
 
         # SPECULAR SECTION
-        link(mix_rgb_5.outputs[0], mix_rgb_9.inputs[2])
-        link(mix_rgb_4.outputs[0], mix_rgb_5.inputs[1])
-        link(group_input.outputs[10], mix_rgb_4.inputs[0])
-        link(color_ramp_5.outputs[0], mix_rgb_4.inputs[1])
-        link(color_ramp_6.outputs[0], mix_rgb_4.inputs[2])
+        # link(mix_rgb_5.outputs[0], mix_rgb_9.inputs[2])
+        link(mix_rgb_5.outputs[0], mix_rgb_4.inputs[1])
+        link(color_ramp_5.outputs[0], mix_rgb_5.inputs[1])
+        link(color_ramp_6.outputs[0], mix_rgb_5.inputs[2])
+        link(color_ramp_6.outputs[1], mix_rgb_4.inputs[2])
+
         link(shaderto_rgb_2.outputs[0], color_ramp_5.inputs[0])
         link(shaderto_rgb_2.outputs[0], color_ramp_6.inputs[0])
         link(specular_bdsf.outputs[0], shaderto_rgb_2.inputs[0])
         link(vector_math_1.outputs[0], specular_bdsf.inputs[5])
         link(geometry_1.outputs[1], vector_math_1.inputs[0])
         link(combine_xyz.outputs[0], vector_math_1.inputs[1])
-        link(group_input.outputs[11], combine_xyz.inputs[0])
-        link(group_input.outputs[12], combine_xyz.inputs[1])
-        link(group_input.outputs[13], combine_xyz.inputs[2])
+        link(group_in.outputs[9], mix_rgb_4.inputs[2])
+        link(group_in.outputs[10], mix_rgb_5.inputs[0])
+        link(group_in.outputs[11], combine_xyz.inputs[0])
+        link(group_in.outputs[12], combine_xyz.inputs[1])
+        link(group_in.outputs[13], combine_xyz.inputs[2])
 
-            # NEAR KEY LIGHT / BASE COLOR
-        link(mix_rgb_7.outputs[0], mix_rgb_6.inputs[1])
-        link(group_input.outputs[1], mix_rgb_7.inputs[2])
-        link(group_input.outputs[0], mix_rgb_6.inputs[2])
-        link(mix_rgb_6.outputs[0], mix_rgb_8.inputs[1])
-        link(group_input.outputs[8], mix_rgb_8.inputs[2])
+        # NEAR KEY LIGHT / BASE COLOR
+        link(mix_rgb_1.outputs[0], mix_rgb_7.inputs[1])
+        link(mix_rgb_7.outputs[0], mix_rgb_8.inputs[1])
         link(mix_rgb_8.outputs[0], mix_rgb_9.inputs[1])
-        link(mix_rgb_5.outputs[0], mix_rgb_9.inputs[2])
-        link(mix_rgb_9.outputs[0], mix_rgb_10.inputs[2])
-        link(group_input.outputs[5], mix_rgb_10.inputs[1])
-        link(color_ramp_4.outputs[0], mix_rgb_10.inputs[0])
-        link(mix_rgb_10.outputs[0], mix_rgb_11.inputs[1])
-        link(mix_rgb_3.outputs[0], mix_rgb_11.inputs[2])
-        link(mix_rgb_11.outputs[0], group_output.inputs[0])
+        link(mix_rgb_2.outputs[0], mix_rgb_9.inputs[2])
+        link(mix_rgb_9.outputs[0], mix_rgb_10.inputs[1])
+        link(mix_rgb_4.outputs[0], mix_rgb_10.inputs[2])
+        link(mix_rgb_10.outputs[0], mix_rgb_11.inputs[2])
+        link(color_ramp_4.outputs[0], mix_rgb_11.inputs[0])
+        link(mix_rgb_11.outputs[0], mix_rgb_12.inputs[1])
+        link(mix_rgb_3.outputs[0], mix_rgb_12.inputs[2])
+
+        link(group_in.outputs[5], mix_rgb_11.inputs[1])
+        link(group_in.outputs[1], mix_rgb_7.inputs[2])
+        link(group_in.outputs[0], mix_rgb_8.inputs[2])
+
+        link(mix_rgb_12.outputs[0], group_out.inputs[0])
 
         # Add Node Group into Node Editor
         tree = bpy.context.object.active_material.node_tree
@@ -361,7 +366,18 @@ class NPR_Shader(Operator):
         group_node.node_tree = npr_group
         group_node.location = (-40, 300)
         group_node.use_custom_color = True
-        group_node.color = (1, 0.341, 0.034)
+        group_node.color = (0,0,0)
+        group_node.inputs[0].default_value = (0.044, 0.034, 0.238, 1)
+        group_node.inputs[1].default_value = (0.266, 0.168, 0.753, 1)
+        group_node.inputs[2].default_value = (1, 0.275, 0.440, 1)
+        group_node.inputs[3].default_value = (1, 0.815, 0.440, 1)
+        group_node.inputs[4].default_value = (0.184, 0.056, 0.708, 1)
+        group_node.inputs[5].default_value = (0, 0, 0, 1)
+        group_node.inputs[6].default_value = 10
+        group_node.inputs[7].default_value = 9
+        group_node.inputs[8].default_value = 0.5
+        group_node.inputs[9].default_value = (0.051, 0.054, 0.098, 1)
+        group_node.inputs[10].default_value = 1
         group_node.width = 250
 
         shader_node_output_material_node = tree.nodes["Material Output"]
@@ -438,3 +454,4 @@ def unregister():
     bpy.utils.unregister_class(NPR_Shader)
     bpy.utils.unregister_class(Outline)
     bpy.utils.register_class(ShaderPanel)
+
