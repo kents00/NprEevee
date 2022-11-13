@@ -3,7 +3,7 @@
 ![](https://imgur.com/dRSjo7v.png)
 Set of group nodes that transforms your meshes into non-photorealistic Shaders
 
-Download this repo and go to folder `release` and copy the zip file and install this inside of Blender, and you're good to go.
+Download this ![here](https://kentedoloverio.gumroad.com/l/npr-eevee)
 
 #### How to Use
 
