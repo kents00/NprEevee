@@ -11,7 +11,7 @@ import bpy
 from bpy.types import Panel, Operator
 
 
-# THIS IS THE LATEST VERSION OF THIS ADDON; INSTALL THE LATEST VERSION ON THE FOLDER "RELEASE"
+# THIS IS THE LATEST VERSION OF THIS ADDON; DOWNLOAD THE LATEST VERSION ON GUMROAD
 
 class NPR_Shader(Operator):
     bl_idname = "material.append_npr_nodes"
