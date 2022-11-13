@@ -3,7 +3,7 @@
 ![](https://imgur.com/dRSjo7v.png)
 Set of group nodes that transforms your meshes into non-photorealistic Shaders
 
-Download this ![here](https://kentedoloverio.gumroad.com/l/npr-eevee)
+Download it [here](https://kentedoloverio.gumroad.com/l/npr-eevee)
 
 #### How to Use
 
