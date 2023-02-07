@@ -2,16 +2,19 @@ bl_info = {
     "name" : "NPR Shader",
     "blender" : (3,2,2),
     "category" : "Material",
-    "version" : (1,2,1),
+    "location" : "Shader Editor > NPR Shader",
+    "version" : (2,7,23),
     "author" : "Kent Edoloverio",
-    "description" : "Add Non-photo realistic Shader to your Meshes"
+    "description" : "Add Non-photo realistic Shader to your Meshes",
+    "wiki_url" : "",
+    "tracker_url" : "",
     }
 
 import bpy
 from bpy.types import Panel, Operator
 
 
-# THIS IS THE LATEST VERSION OF THIS ADDON; DOWNLOAD THE LATEST VERSION ON GUMROAD
+# THIS IS THE LATEST VERSION OF THIS ADDON; INSTALL THE LATEST VERSION ON THE FOLDER "RELEASE"
 
 class NPR_Shader(Operator):
     bl_idname = "material.append_npr_nodes"
@@ -442,16 +445,20 @@ class ShaderPanel(Panel):
         op.url = 'https://ko-fi.com/kents_workof_art'
 
 
+classes = (
+    NPR_Shader,
+    Outline,
+    ShaderPanel
+)
 
 def register():
-    bpy.utils.register_class(NPR_Shader)
-    bpy.utils.register_class(Outline)
-    bpy.utils.register_class(ShaderPanel)
+    for cls in classes:
+        bpy.utils.register_class(cls)
+
 
 
 
 def unregister():
-    bpy.utils.unregister_class(NPR_Shader)
-    bpy.utils.unregister_class(Outline)
-    bpy.utils.register_class(ShaderPanel)
+    for cls in classes:
+        bpy.utils.unregister_class(cls)
 
