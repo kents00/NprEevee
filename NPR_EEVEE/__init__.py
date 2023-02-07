@@ -3,7 +3,7 @@ bl_info = {
     "blender" : (3,2,2),
     "category" : "Material",
     "location" : "Shader Editor > NPR Shader",
-    "version" : (1,2,1),
+    "version" : (2,7,23),
     "author" : "Kent Edoloverio",
     "description" : "Add Non-photo realistic Shader to your Meshes",
     "wiki_url" : "",
