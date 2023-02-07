@@ -2,9 +2,12 @@ bl_info = {
     "name" : "NPR Shader",
     "blender" : (3,2,2),
     "category" : "Material",
+    "location" : "Shader Editor > NPR Shader",
     "version" : (1,2,1),
     "author" : "Kent Edoloverio",
-    "description" : "Add Non-photo realistic Shader to your Meshes"
+    "description" : "Add Non-photo realistic Shader to your Meshes",
+    "wiki_url" : "",
+    "tracker_url" : "",
     }
 
 import bpy
