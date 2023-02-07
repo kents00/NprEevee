@@ -1,8 +1,8 @@
 bl_info = {
     "name" : "NPR Shader",
     "blender" : (3,2,2),
-    "category" : "Material",
-    "location" : "Shader Editor > NPR Shader",
+    "category" : "3D View",
+    "location" : "3D View > NPR Shader",
     "version" : (2,7,23),
     "author" : "Kent Edoloverio",
     "description" : "Add Non-photo realistic Shader to your Meshes",
@@ -454,7 +454,7 @@ classes = (
 def register():
     for cls in classes:
         bpy.utils.register_class(cls)
-        
+
 def unregister():
     for cls in classes:
         bpy.utils.unregister_class(cls)
