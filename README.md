@@ -2,7 +2,7 @@
 
 ![0001-0250 (2)](https://user-images.githubusercontent.com/69900896/216748961-59c1ba70-3d00-489f-aea4-825e84a53298.gif)
 
-Set of group nodes that transforms your meshes into non-photorealistic Shaders. Toon shading is one of the Main EEVEE capabilities that allows users to create flat and stylized looks with a limited color palette. It also includes a range of line styles for creating outlines and edge detection, which can assist give the images a hand-drawn appearance.
+Set of group nodes that transforms your meshes into non-photorealistic Shaders. Toon shading is one of the NPR EEVEE capabilities that allows users to create flat and stylized looks with a limited color palette. It also includes a range of line styles for creating outlines and edge detection, which can assist give the images a hand-drawn appearance.
 
 Using this in anime has proven to be a successful strategy since it allows producers to achieve a distinct and visually appealing style that distinguishes it from more typical photorealistic 3D animation. This can also help to lessen the strain of producing precise 3D models and textures, focusing instead on creating the desired stylized style. The resulting visuals can elicit nostalgia, as they are similar to the aesthetic of conventional 2D animation found in anime.
 
