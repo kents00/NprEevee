@@ -32,3 +32,7 @@ The add-on will now be installed and will appear in the list of available add-on
 You can also install an add-on by clicking the "Install from File" button in the "Add-ons" tab of the Preferences window and selecting the add-on file from the file browser.
 
 ![](https://user-images.githubusercontent.com/69900896/217299801-e4455e6d-03c2-4cfb-a6df-41ccffb7326f.gif)
+
+## Issues
+
+If you're having trouble integrating this code into your addon, [open a new issue](https://github.com/kents00/NprEevee/issues). As the module continues to develop, it will be easier for more developers to integrate updates and improve blender's overall user performance!
