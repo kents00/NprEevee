@@ -6,6 +6,8 @@ Set of group nodes that transforms your meshes into non-photorealistic Shaders. 
 
 Using this in anime has proven to be a successful strategy since it allows producers to achieve a distinct and visually appealing style that distinguishes it from more typical photorealistic 3D animation. This can also help to lessen the strain of producing precise 3D models and textures, focusing instead on creating the desired stylized style. The resulting visuals can elicit nostalgia, as they are similar to the aesthetic of conventional 2D animation found in anime.
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q5Q8BW198)
+
 [**DOWNLOAD IT HERE**](https://kentedoloverio.gumroad.com/l/npr-eevee)
 
 ### How to Use
